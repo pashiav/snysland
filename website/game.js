@@ -9,6 +9,7 @@ import world from './world.js';
 import Assets from './assets.js'
 
 import './input.js';
+import codec from './codec.js';
 
 export class GameClass {
 	constructor(renderer, scene, camera) {
@@ -33,7 +34,8 @@ export class GameClass {
 		this.scene.add(directionalLight); // Add the light to the scene
 
 		// Start game world
-		stateManager.set(world, this.scene);
+		stateManager.set(codec, this.scene);
+		
 	}
 
 	update(dt) {
