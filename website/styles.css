@@ -1,0 +1,37 @@
+body {
+    background-color: #dd6e52; /* Set background color to black */
+    color: white; /* Set text color to white */
+    font-family: Arial, sans-serif; /* Set font */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    overflow: hidden; /* Hide overflow */
+}
+.content {
+    max-width: 100%; /* Set maximum width for content */
+    height: 100%;
+    margin: 0 auto; /* Center content horizontally */
+    padding: 20px; /* Add padding around content */
+}
+
+.canvas-container {
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* filler sizes for width and height */
+    width: 1080px;
+    height: 720px;
+}
+
+/* Additional CSS for styling content */
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
