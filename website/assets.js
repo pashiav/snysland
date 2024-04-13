@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'GLTFLoader';
 
+
 class AssetsClass {
 	constructor() {
-		this.image = {};
+		this.image = {}
 
 		this.startLoading();
 		
@@ -28,6 +29,7 @@ class AssetsClass {
 
 		this.loadModel("assets/ball.glb", "player");
 		this.loadModel("assets/snake2.glb", "snake");
+		this.loadModel("assets/codec_screen.glb", "codec");
 		//this.loadModel("assets/level1entrancephase.glb", "area");
 
 		// JSONs
@@ -39,7 +41,6 @@ class AssetsClass {
 
 		this.waitLoading();
 	}
-
 	loadModel(filename, name) {
 		this.mesh[name] = false // Temporary model
 
