@@ -18,8 +18,8 @@ export class PhysicsObject {
 
 		// Spatial Hash location
 		this.spatialHash = spatialHash
-		this.cellx = 0
-		this.celly = 0
+		this.cellx = 99
+		this.celly = 99
 		this.cellw = 0
 		this.cellh = 0
 	}
@@ -44,6 +44,7 @@ export class PhysicsObject {
 		let spatialHash = this.spatialHash
 		let [cx, cy, cw, ch] = [this.cellx, this.celly, this.cellw, this.cellh]
 		let [ncx, ncy, ncw, nch] = spatialHash.getCoords(this.x+this.shape.x1,this.y+this.shape.y1,this.x+this.shape.x2,this.y+this.shape.y2)
+		
 		if (!(cx == ncx && cy == ncy && cw == ncw && ch == nch)) {
 			// TODO: Optimize this
 			// Remove references to this object from old location
@@ -60,6 +61,7 @@ export class PhysicsObject {
 			}
 			[this.cellx, this.celly, this.cellw, this.cellh] = [ncx, ncy, ncw, nch]
 		}
+		console.log(spatialHash)
 	}
 
 	// Object collided; object name, object, normal x, normal y

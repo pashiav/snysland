@@ -19,13 +19,13 @@ class World {
 		this.objects = {
 			Player: {},
 			Snake: {},
-			Wall: {}
+			Wall: {dontUpdate: true}
 		};
 
-		this.player = this.spawnObject("Player", new Player(this.spatial_hash, this.scene, 0, 0, 0));
+		this.player = this.spawnObject("Player", new Player(this.spatial_hash, this.scene, 20, 20, 0));
 
 		// Area
-		this.area = new Area();
+		this.area = new Area(this.scene);
 	}
 
 	spawnObject(name, obj, id) {
@@ -43,7 +43,9 @@ class World {
 		// Update all objects
 		for (const [objsName, objsList] of Object.entries(this.objects)) {
 			for (const [ia, a] of Object.entries(objsList)) {
-				a.update(dt);
+				if (a.update) {
+					a.update(dt);
+				}
 			}
 		}
 		updatePhysics(this.objects, this.spatial_hash, dt);
@@ -53,7 +55,9 @@ class World {
 		// Render all objects
 		for (const [objsName, objsList] of Object.entries(this.objects)) {
 			for (const [ia, a] of Object.entries(objsList)) {
-				a.render(renderer, scene, camera);
+				if (a.render) {
+					a.render(renderer, scene, camera);
+				}
 			}
 		}
 	}

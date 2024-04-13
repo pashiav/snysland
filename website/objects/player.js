@@ -16,17 +16,24 @@ export class Player extends PhysicsObject {
 		this.sy = 0;
 
 		this.angle = 0;
+		this.facing = 0;
 		this.walking = false;
 		this.buttons = {
 			up: false,
 			down: false,
 			left: false,
-			right: false
+			right: false,
+
+			turnLeft: false,
+			turnRight: false
 		}
+
+		this.active = true;
+		this.static = false;
 
 		this.speed = 10;
 
-		this.size = 20;
+		this.size = 1;
 		this.shape = new Shape(
 			-this.size/2,-this.size/2,
 			this.size/2,-this.size/2,
@@ -36,32 +43,49 @@ export class Player extends PhysicsObject {
 
 		this.model = Assets.mesh.player.clone();
 		scene.add(this.model);
+
+		this.setPosition(x, y);
 	}
 
 	update(dt) {
-		// movement
 		let but = this.buttons;
+		// turning
+		if (but.turnLeft) {
+			this.facing += Math.PI/2 * dt;
+
+		} else if (but.turnRight) {
+			this.facing -= Math.PI/2 * dt;
+		}
+
+		// movement
 		if (but.up || but.down || but.left || but.right) {
+			// FPS movement
 			this.walking = true;
-			let angle = 0; // radians
-			let vx = 0;
-			let vy = 0;
+			let angle = this.facing; // radians
 			if (but.up) {
-				vy = -1;
+				if (but.left) {
+					angle += Math.PI/4;
+				} else if (but.right) {
+					angle -= Math.PI/4;
+				}
+			} else if (but.down) {
+				if (but.left) {
+					angle += Math.PI*0.75;
+				} else if (but.right) {
+					angle -= Math.PI*0.75;
+				} else {
+					angle += Math.PI;
+				}
+			} else if (but.left) {
+				angle += Math.PI/2;
+			} else if (but.right) {
+				angle -= Math.PI/2;
 			}
-			if (but.down) {
-				vy = 1;
-			}
-			if (but.left) {
-				vx = -1;
-			}
-			if (but.right) {
-				vx = 1;
-			}
-			angle = Math.atan2(-vy, vx);
 
 			this.sx = Math.cos(angle) * this.speed;
 			this.sy = Math.sin(angle) * this.speed;
+
+			this.angle = angle;
 		} else {
 			this.walking = false;
 			this.sx = 0;
@@ -73,9 +97,12 @@ export class Player extends PhysicsObject {
 		// called every frame
 		let model = this.model;
 		if (model) {
-			model.position.x = this.x;
-			model.position.y = this.y;
-			model.position.z = this.z;
+			camera.position.x = this.x;
+			camera.position.y = 2;
+			camera.position.z = -this.y;
+
+			// set rotation to current angle
+			camera.rotation.y = this.facing-Math.PI/2;
 		}
 	}
 
@@ -92,6 +119,13 @@ export class Player extends PhysicsObject {
 		if (key === "d") {
 			this.buttons.right = true;
 		}
+
+		if (key === "ArrowLeft") {
+			this.buttons.turnLeft = true;
+		}
+		if (key === "ArrowRight") {
+			this.buttons.turnRight = true;
+		}
 	}
 
 	keyRelease(key) {
@@ -107,9 +141,17 @@ export class Player extends PhysicsObject {
 		if (key === "d") {
 			this.buttons.right = false;
 		}
+
+		if (key === "ArrowLeft") {
+			this.buttons.turnLeft = false;
+		}
+		if (key === "ArrowRight") {
+			this.buttons.turnRight = false;
+		}
 	}
 	// Collision
 	collide(name, obj, nx, ny) {
+		console.log(name)
 		return true
 	}
 

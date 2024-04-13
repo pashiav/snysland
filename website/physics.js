@@ -1,5 +1,7 @@
 // Collision & physics system
 
+import { vec2Dot } from './vec2.js'
+
 // Update physics; (list of objects, deltaTime)
 let listOfCollisions = new Map()
 export function updatePhysics(objs, spatialHash, dt) {
