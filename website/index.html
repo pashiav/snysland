@@ -7,18 +7,44 @@
 	<title>Snysland: Project Snoppenheimer</title>
 	<link rel="icon" type="image/x-icon" href="./assets/favicon.png">
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	
+	<style>
+        body {
+            background-color: rgb(201, 167, 167); /* Set background color to black */
+            color: white; /* Set text color to white */
+            font-family: Arial, sans-serif; /* Set font */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .content {
+            max-width: 800px; /* Set maximum width for content */
+            margin: 0 auto; /* Center content horizontally */
+            padding: 20px; /* Add padding around content */
+        }
+
+        /* Additional CSS for styling content */
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+    </style>
+
+	<script type="importmap">
+		{
+		  "imports": {
+			"three": "/three.module.js"
+		  }
+		}
+	</script>
 </head>
 
 <body>
-	<div class="game-container">
-		<div class="color-underlay">
-			<!-- Canvas to render Game -->
-			<div id="canvasContainer">
-				<canvas id="gameCanvas" width="1024" height="576" oncontextmenu="return false;"></canvas>
-			</div>
-		</div>
-	</div>
-
 	<script type="module" src="/main.js"></script>
 </body>
 

@@ -6,6 +6,10 @@ const server = http.createServer(app);
 // Send HTML file when user connects to server
 const path = require("path"); // Import the "path" module.
 app.use(express.static(path.join(__dirname, "website"))); //serve static files from the "website" directory.
+
+// Serve Three.js library from node_modules
+app.use('/three', express.static(path.join(__dirname, 'node_modules', 'three', 'build')));
+
 app.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "website/index.html"));
 });
