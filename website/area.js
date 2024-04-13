@@ -14,7 +14,6 @@ export class Area {
 		//this.scene.add(this.model);
 
 		this.json = Assets.json[name];
-		console.log(Assets.json, name)
 
 		// this.layout = [
 		// 	[1,1,1,1,1],
