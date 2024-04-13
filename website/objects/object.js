@@ -61,7 +61,6 @@ export class PhysicsObject {
 			}
 			[this.cellx, this.celly, this.cellw, this.cellh] = [ncx, ncy, ncw, nch]
 		}
-		console.log(spatialHash)
 	}
 
 	// Object collided; object name, object, normal x, normal y

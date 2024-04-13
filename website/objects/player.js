@@ -10,13 +10,16 @@ export class Player extends PhysicsObject {
 
 		this.x = x;
 		this.y = y;
-		this.z = z;
+		this.z = 10;
 
 		this.sx = 0;
 		this.sy = 0;
 
 		this.angle = 0;
-		this.facing = 0;
+
+		this.facing = 0; // radians
+		this.pitch = Math.PI/2; // Between 0 and PI
+
 		this.walking = false;
 		this.buttons = {
 			up: false,
@@ -31,7 +34,7 @@ export class Player extends PhysicsObject {
 		this.active = true;
 		this.static = false;
 
-		this.speed = 10;
+		this.speed = 20;
 
 		this.size = 1;
 		this.shape = new Shape(
@@ -98,11 +101,12 @@ export class Player extends PhysicsObject {
 		let model = this.model;
 		if (model) {
 			camera.position.x = this.x;
-			camera.position.y = 2;
+			camera.position.y = this.z;
 			camera.position.z = -this.y;
 
 			// set rotation to current angle
 			camera.rotation.y = this.facing-Math.PI/2;
+			//camera.rotation.z = this.pitch;
 		}
 	}
 
@@ -149,9 +153,15 @@ export class Player extends PhysicsObject {
 			this.buttons.turnRight = false;
 		}
 	}
+
+	mouseMoved(x, y, dx, dy) {
+		this.facing += dx/100;
+
+		this.pitch = Math.max(0, Math.min(Math.PI, this.pitch + dy/100));
+	}
+
 	// Collision
 	collide(name, obj, nx, ny) {
-		console.log(name)
 		return true
 	}
 

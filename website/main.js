@@ -11,7 +11,7 @@ camera.position.z = 5;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(gameWidth, gameHeight);
-const canvasContainer = document.getElementById('canvas');
+export const canvasContainer = document.getElementById('canvas');
 canvasContainer.appendChild(renderer.domElement);
 
 console.log("let there be light")

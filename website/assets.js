@@ -14,7 +14,7 @@ class AssetsClass {
 			color: 0x00ffff, // green
 		});
 		this.material.white = new THREE.MeshLambertMaterial({
-			color: 0xffffff, // green
+			color: 0xffffff, // white
 		});
 		this.material.missing = new THREE.MeshLambertMaterial({
 			color: 0xff69b4, // green
@@ -30,39 +30,14 @@ class AssetsClass {
 		this.loadModel("assets/snake2.glb", "snake");
 		//this.loadModel("assets/level1entrancephase.glb", "area");
 
+		// JSONs
+		this.json = {};
+		this.loadJSON("areas/area1.json", "area1");
+		this.loadJSON("areas/area2.json", "area2");
+		this.loadJSON("areas/area3.json", "area3");
+		this.loadJSON("areas/area4.json", "area4");
+
 		this.waitLoading();
-	}
-
-	startLoading() {
-		this.loading = true;
-		this.loading_waiting = false;
-		this.loading_done = 0;
-		this.loading_count = 0;
-	}
-
-	waitLoading() {
-		console.log("officially waiting")
-		this.loading_waiting = true
-		if (this.loading_done >= this.loading_count) {
-			this.loading_done = 0;
-			this.loading_count = 0;
-			this.loading = false;
-		}
-	}
-
-	addLoading() {
-		this.loading_count++;
-		console.log("Loading count: " + this.loading_count)
-	}
-
-	progressLoading() {
-		this.loading_done++;
-		if (this.loading_waiting && this.loading_done >= this.loading_count) {
-			this.loading_done = 0;
-			this.loading_count = 0;
-			this.loading = false;
-			console.log("done loading")
-		}
 	}
 
 	loadModel(filename, name) {
@@ -97,6 +72,63 @@ class AssetsClass {
 				}
 			);
 		});
+	}
+
+	loadJSON(filePath, name) {
+		// JSON file must be loaded asynchronously
+		this.json[name] = false;
+
+		const assetsList = this;
+		this.addLoading();
+
+		fetch(filePath).then(response => {
+			if (!response.ok) {
+				console.log("JSON Network response was not ok")
+			}
+			return response.json()
+		})
+		.then(data => {
+			console.log("JSON loaded: ", data)
+			assetsList.json[name] = data;
+			assetsList.progressLoading();
+			//callBack(data)
+		})
+		.catch(error => {
+			console.log("There was a problem loading the JSON file:", error)
+		})
+	}
+
+	// Loading screen
+	startLoading() {
+		this.loading = true;
+		this.loading_waiting = false;
+		this.loading_done = 0;
+		this.loading_count = 0;
+	}
+
+	waitLoading() {
+		console.log("officially waiting")
+		this.loading_waiting = true
+		if (this.loading_done >= this.loading_count) {
+			this.loading_done = 0;
+			this.loading_count = 0;
+			this.loading = false;
+		}
+	}
+
+	addLoading() {
+		this.loading_count++;
+		console.log("Loading count: " + this.loading_count)
+	}
+
+	progressLoading() {
+		this.loading_done++;
+		if (this.loading_waiting && this.loading_done >= this.loading_count) {
+			this.loading_done = 0;
+			this.loading_count = 0;
+			this.loading = false;
+			console.log("done loading")
+		}
 	}
 }
 

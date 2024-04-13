@@ -25,7 +25,7 @@ class World {
 		this.player = this.spawnObject("Player", new Player(this.spatial_hash, this.scene, 20, 20, 0));
 
 		// Area
-		this.area = new Area(this.scene);
+		this.area = new Area(this.scene, "area1");
 	}
 
 	spawnObject(name, obj, id) {
@@ -70,6 +70,11 @@ class World {
 	keyRelease(key) {
 		// Key release
 		this.player.keyRelease(key);
+	}
+
+	mouseMoved(x, y, dx, dy) {
+		// Mouse move
+		this.player.mouseMoved(x, y, dx, dy);
 	}
 }
 

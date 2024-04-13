@@ -49,6 +49,12 @@ class StateManager {
 			this.game_state.mouseRelease(button, x, y);
 		}
 	}
+
+	mouseMoved(x, y, dx, dy) {
+		if (this.game_state.mouseMoved) {
+			this.game_state.mouseMoved(x, y, dx, dy);
+		}
+	}
 }
 
 const stateManager = new StateManager();
