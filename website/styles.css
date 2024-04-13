@@ -1,5 +1,7 @@
 body {
-    background-color: #dd6e52; /* Set background color to black */
+    background: url("https://media.discordapp.net/attachments/1228514685964259518/1228558417602543757/wallpaper.png?ex=662c7b30&is=661a0630&hm=c82bba37492465dd668bafb00d800d498d8e88393f048179d9c48b8d3a18bee5&=&format=webp&quality=lossless&width=1644&height=1010");
+    background-size: cover; /* covers background with image */
+
     color: white; /* Set text color to white */
     font-family: Arial, sans-serif; /* Set font */
     margin: 0; /* Remove default margin */
