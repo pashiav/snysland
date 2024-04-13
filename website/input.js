@@ -34,12 +34,11 @@ let mouseScreenX = 0
 let mouseScreenY = 0
 function convertMouseCoordsToScreen(mouseX, mouseY) {
 	var rect = canvasContainer.getBoundingClientRect() // abs. size of element
-	let scaleX = canvasContainer.width / canvasContainer.width	// relationship bitmap vs. element for x
-	let scaleY = canvasContainer.height / canvasContainer.height  // relationship bitmap vs. element for y
+	let scaleX = 1280 / rect.width	// relationship bitmap vs. element for x
+	let scaleY = 720 / rect.height  // relationship bitmap vs. element for y
 	
-	let screenX = Math.max(0, Math.min(canvasContainer.width, (mouseX - rect.left) * scaleX))   // scale mouse coordinates after they have
-	let screenY = Math.max(0, Math.min(canvasContainer.height, (mouseY - rect.top) * scaleY))	 // been adjusted to be relative to element
-	console.log(screenX, screenY)
+	let screenX = Math.max(0, Math.min(1280, (mouseX - rect.left) * scaleX))   // scale mouse coordinates after they have
+	let screenY = Math.max(0, Math.min(720, (mouseY - rect.top) * scaleY))	 // been adjusted to be relative to element
 	return [screenX, screenY]
 }
 
@@ -52,10 +51,12 @@ function mouseMoved(event) {
 	let [mouseScreenX2, mouseScreenY2] = convertMouseCoordsToScreen(pos[0], pos[1])
 	mouseScreenX = mouseScreenX2
 	mouseScreenY = mouseScreenY2
-	//console.log(oldX, oldY)
 	
 	// show difference
-	stateManager.mouseMoved(mouseScreenX, mouseScreenY, mouseScreenX - oldX, mouseScreenY - oldY)
+	
+	let mouseMovementX = event.movementX || event.mozMovementX || 0;
+	let mouseMovementY = event.movementY || event.mozMovementY || 0;
+	stateManager.mouseMoved(mouseScreenX, mouseScreenY, mouseMovementX, mouseMovementY)
 }
 
 // Postion; returns [x, y]
@@ -64,6 +65,9 @@ function getMousePos() {
 }
 
 function mouseClicked(event) {
+    canvas.requestPointerLock = canvas.requestPointerLock || canvas.mozRequestPointerLock;
+    canvas.requestPointerLock();
+
 	event.preventDefault();
 	let [x, y] = getMousePos()
 	stateManager.click(event.button, x, y)
@@ -77,4 +81,16 @@ function mouseReleased(event) {
 function checkMouseInside(x, y, w, h) {
 	// Check if mouse is inside a box
 	return ((mouseScreenX > x) && (mouseScreenX < x+w) && (mouseScreenY > y) && (mouseScreenY < y+h))
+}
+
+// Add a pointer lock change event listener to the document
+document.addEventListener('pointerlockchange', lockChangeAlert, false);
+document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
+
+function lockChangeAlert() {
+    if (document.pointerLockElement === canvas || document.mozPointerLockElement === canvas) {
+        console.log('The pointer lock status is now locked');
+    } else {
+        console.log('The pointer lock status is now unlocked');  
+    }
 }

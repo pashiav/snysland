@@ -3,6 +3,7 @@ import { PhysicsObject } from './object.js'
 import { Shape } from '../shape.js'
 import Assets from '../assets.js'
 import { vec2Unit, vec2Norm } from '../vec2.js'
+import * as THREE from 'three';
 
 export class Player extends PhysicsObject {
 	constructor (spatialHash, scene, x, y, z) {
@@ -18,7 +19,7 @@ export class Player extends PhysicsObject {
 		this.angle = 0;
 
 		this.facing = 0; // radians
-		this.pitch = Math.PI/2; // Between 0 and PI
+		this.pitch = 0; // Between 0 and PI
 
 		this.walking = false;
 		this.buttons = {
@@ -104,9 +105,20 @@ export class Player extends PhysicsObject {
 			camera.position.y = this.z;
 			camera.position.z = -this.y;
 
-			// set rotation to current angle
-			camera.rotation.y = this.facing-Math.PI/2;
-			//camera.rotation.z = this.pitch;
+			// Create a direction vector
+			let yaw = this.facing + Math.PI/2;
+			let pitch = this.pitch;
+			const direction = new THREE.Vector3(
+				Math.sin(yaw) * Math.cos(pitch),
+				Math.sin(pitch),
+				Math.cos(yaw) * Math.cos(pitch)
+			);
+
+			// Add the direction vector to the camera's position to get the target
+			const target = new THREE.Vector3().addVectors(camera.position, direction);
+
+			// Set the camera to look at the target
+			camera.lookAt(target);
 		}
 	}
 
@@ -155,9 +167,11 @@ export class Player extends PhysicsObject {
 	}
 
 	mouseMoved(x, y, dx, dy) {
-		this.facing += dx/100;
+		let sensitivity = 0.004;
 
-		this.pitch = Math.max(0, Math.min(Math.PI, this.pitch + dy/100));
+		this.facing -= dx*sensitivity;
+
+		this.pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2, this.pitch - dy*sensitivity));
 	}
 
 	// Collision
