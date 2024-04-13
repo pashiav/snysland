@@ -1,6 +1,8 @@
 import { PhysicsObject } from './objects/object.js'
 import { Shape } from './shape.js'
 import Assets from './assets.js'
+import { Snake } from './objects/snake.js'; // Import the Snake class
+
 
 import { Wall } from './objects/wall.js';
 
@@ -14,6 +16,7 @@ export class Area {
 		//this.scene.add(this.model);
 
 		this.json = Assets.json[name];
+		console.log(Assets.json, name)
 
 		// this.layout = [
 		// 	[1,1,1,1,1],
@@ -32,6 +35,13 @@ export class Area {
 				}
 			}
 		}
+
+		this.snakes = this.json.snakes;
+		// Create Snake objects
+		this.snakes.forEach(snakeData => {
+			// world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x*10, snakeData.y*10, snakeData.angle, snakeData.pivot_360, snakeData.clockwise, snakeData.start_angle, snakeData.end_angle));
+			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x, snakeData.y));
+		});
 	}
 
 	render (scene, camera, renderer) {
