@@ -14,7 +14,7 @@ export class Snake extends PhysicsObject {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.z = 0;
+        this.z = 10;
 
         // this.angle = angle * (Math.PI / 180); // Convert degrees to radians
 
@@ -43,22 +43,17 @@ export class Snake extends PhysicsObject {
         
 		this.model = Assets.mesh.snake.clone();
         this.model.position.x = this.x;
-		this.model.position.y = this.y;
-		this.model.position.z = this.z;
+		this.model.position.y = this.z;
+		this.model.position.z = -this.y;
 
-
-
-        this.model.scale.x = 10;
-		this.model.scale.z = 10;
 		scene.add(this.model);
 
 		this.setPosition(x, y);
-        console.log(x,y);
         
 	}
 
     update(dt) {
-        this.model.position.set(this.x, this.y, this.z);
+        this.model.position.set(this.x, this.z, -this.y);
     }
 
 	render (scene, camera, renderer) {
