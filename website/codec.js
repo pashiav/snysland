@@ -9,11 +9,10 @@ class Codec {
 		// Rendering
         this.texti = 1;
 		this.scene = scene;
-        this.scene.add(Assets.mesh.codec);
-        // Assets.mesh.codec.rotation.z = Math.PI*.5;
-        Assets.mesh.codec.rotation.y = Math.PI;
-        Assets.mesh.codec.position.set(320, 40, 0);
-        Assets.mesh.codec.scale.set(.5, .5, .7);
+        this.scene.add(Assets.mesh.title);
+        Assets.mesh.title.rotation.x = Math.PI*.35;
+        Assets.mesh.title.position.set(0, 4, -4.25);
+        Assets.mesh.title.scale.set(.5, .5, .5);
         
     }
     
@@ -38,7 +37,7 @@ class Codec {
 
 	keyPress(key) {
 		// Key press
-        this.scene.remove(Assets.mesh.codec);
+        this.scene.remove(Assets.mesh.title);
 		stateManager.set(world, this.scene);
 
 
