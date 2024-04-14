@@ -1,11 +1,13 @@
 import Assets from './assets.js'
 import stateManager from './state.js';
 import world from './world.js';
+import AudioSystem from './audio.js';
 class Codec {
 	constructor () {
 
 	}
 	load (scene) {
+
 		// Rendering
         this.texti = 1;
 		this.scene = scene;

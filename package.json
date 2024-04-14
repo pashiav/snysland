@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "express": "^4.19.2",
+    "howler": "^2.2.4",
     "three": "^0.163.0"
   },
   "devDependencies": {
