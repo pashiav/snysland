@@ -8,8 +8,8 @@ class StateManager {
 		this.game_state_name = "";
 	}
 
-	set(state, args) {
-		state.load(args);
+	set(state, ...args) {
+		state.load(...args);
 		this.game_state = state;
 		this.game_state_name = this.game_state.name;
 	}
