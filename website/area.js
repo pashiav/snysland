@@ -10,10 +10,12 @@ import world from './world.js';
 
 export class Area {
 	constructor (scene, name) {
-		//this.model = Assets.mesh.area.clone();
+		Assets.startLoading();
+		Assets.loadModel("assets/area1.dae", "area1", Assets.model_loader_collada);
+		Assets.waitLoading();
+		this.model = false;
 		this.scene = scene;
-
-		//this.scene.add(this.model);
+		this.name = name;
 
 		this.json = Assets.json[name];
 		console.log(Assets.json, name)
