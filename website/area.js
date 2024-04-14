@@ -10,15 +10,16 @@ import world from './world.js';
 
 export class Area {
 	constructor (scene, name) {
-		Assets.startLoading();
-		Assets.loadModel("assets/area1.dae", "area1", Assets.model_loader_collada);
-		Assets.waitLoading();
 		this.model = false;
 		this.scene = scene;
 		this.name = name;
+		console.log(Assets.mesh_collection.area1);
+		Assets.mesh_collection.area1.forEach((model) => {
+			model.rotation.x = Math.PI*1.5;
+			this.scene.add(model);
+		});
 
 		this.json = Assets.json[name];
-		console.log(Assets.json, name)
 
 		// this.layout = [
 		// 	[1,1,1,1,1],
@@ -42,7 +43,7 @@ export class Area {
 		// Create Snake objects
 		this.snakes.forEach(snakeData => {
 			// world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x*10, snakeData.y*10, snakeData.angle, snakeData.pivot_360, snakeData.clockwise, snakeData.start_angle, snakeData.end_angle));
-			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x, snakeData.y));
+			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x*10, snakeData.y*10));
 		});
 	}
 

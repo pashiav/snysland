@@ -24,6 +24,7 @@ class AssetsClass {
 		});
 
 		this.mesh = {};
+		this.mesh_collection = {};
 		//this.mesh.player = this.loadModel("assets/ball.glb");
 		
 		const geometry = new THREE.BoxGeometry( 1, 1, 1 );
@@ -32,6 +33,11 @@ class AssetsClass {
 		this.loadModel("assets/ball.glb", "player");
 		this.loadModel("assets/snake.glb", "snake");
 		this.loadModel("assets/codec_screen.glb", "codec");
+
+		this.loadModel("assets/area1.dae", "area1", this.model_loader_collada);
+		this.loadModel("assets/area2.dae", "area2", this.model_loader_collada);
+		this.loadModel("assets/area3.dae", "area3", this.model_loader_collada);
+		this.loadModel("assets/area4.dae", "area4", this.model_loader_collada);
 		//this.loadModel("assets/level1entrancephase.glb", "area");
 
 		// JSONs
@@ -45,6 +51,7 @@ class AssetsClass {
 	}
 	loadModel(filename, name, loader = this.model_loader) {
 		this.mesh[name] = false // Temporary model
+		this.mesh_collection[name] = []
 
 		const assetsList = this;
 
@@ -55,6 +62,16 @@ class AssetsClass {
 				filename,
 				// called when the resource is loaded
 				function (gltf) {
+					if (loader == assetsList.model_loader_collada) {
+						console.log("Collada model loaded", gltf.scene.children);
+						for (let i = 0; i < gltf.scene.children.length; i++) {
+							let child = gltf.scene.children[i];
+							console.log(child);
+							if (child.isMesh) {
+								assetsList.mesh_collection[name].push(child);
+							}
+						}
+					}
 					gltf.scene.traverse(function (child) {
 						if (child.isMesh && !assetsList.mesh[name]) {
 							assetsList.mesh[name] = child; // Set the mesh to the loaded mesh
@@ -110,7 +127,6 @@ class AssetsClass {
 	}
 
 	waitLoading() {
-		console.log("officially waiting")
 		this.loading_waiting = true
 		if (this.loading_done >= this.loading_count) {
 			this.loading_done = 0;
@@ -121,7 +137,6 @@ class AssetsClass {
 
 	addLoading() {
 		this.loading_count++;
-		console.log("Loading count: " + this.loading_count)
 	}
 
 	progressLoading() {
@@ -130,7 +145,6 @@ class AssetsClass {
 			this.loading_done = 0;
 			this.loading_count = 0;
 			this.loading = false;
-			console.log("done loading")
 		}
 	}
 }

@@ -82,15 +82,3 @@ function checkMouseInside(x, y, w, h) {
 	// Check if mouse is inside a box
 	return ((mouseScreenX > x) && (mouseScreenX < x+w) && (mouseScreenY > y) && (mouseScreenY < y+h))
 }
-
-// Add a pointer lock change event listener to the document
-document.addEventListener('pointerlockchange', lockChangeAlert, false);
-document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
-
-function lockChangeAlert() {
-    if (document.pointerLockElement === canvas || document.mozPointerLockElement === canvas) {
-        console.log('The pointer lock status is now locked');
-    } else {
-        console.log('The pointer lock status is now unlocked');  
-    }
-}
