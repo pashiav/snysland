@@ -43,8 +43,7 @@ export class Area {
 		this.snakes = this.json.snakes;
 		// Create Snake objects
 		this.snakes.forEach(snakeData => {
-			// world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x*10, snakeData.y*10, snakeData.angle, snakeData.pivot_360, snakeData.clockwise, snakeData.start_angle, snakeData.end_angle));
-			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, (snakeData.y+0.5)*10, (snakeData.x+0.5)*10));
+			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, (snakeData.y+0.5)*10, (snakeData.x+0.5)*10, snakeData.angle, snakeData.pivot_360, snakeData.clockwise, snakeData.start_angle, snakeData.end_angle));
 		});
 	}
 
