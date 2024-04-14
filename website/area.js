@@ -14,9 +14,9 @@ export class Area {
 		this.model = false;
 		this.scene = scene;
 		this.name = name;
-		console.log(Assets.mesh_collection.area1);
+		console.log(name);
 		this.area = false;
-		Assets.mesh_collection.area1.forEach((model) => {
+		Assets.mesh_collection[name].forEach((model) => {
 			this.area = model
 			model.position.set(0,0,0);
 			model.rotation.x = Math.PI*1.5;
