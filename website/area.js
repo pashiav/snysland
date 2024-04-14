@@ -16,6 +16,7 @@ export class Area {
 		console.log(Assets.mesh_collection.area1);
 		Assets.mesh_collection.area1.forEach((model) => {
 			model.rotation.x = Math.PI*1.5;
+			model.rotation.z = Math.PI*1.5;
 			this.scene.add(model);
 		});
 
@@ -34,7 +35,7 @@ export class Area {
 		for (let x = 0; x < this.layout.length; x++) {
 			for (let y = 0; y < this.layout[x].length; y++) {
 				if (this.layout[x][y] == 1) {
-					world.spawnObject("Wall", new Wall(world.spatial_hash, this.scene, x*10, y*10, 0));
+					world.spawnObject("Wall", new Wall(world.spatial_hash, this.scene, (x+0.5)*10, (y+0.5)*10, 0));
 				}
 			}
 		}
@@ -43,7 +44,7 @@ export class Area {
 		// Create Snake objects
 		this.snakes.forEach(snakeData => {
 			// world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x*10, snakeData.y*10, snakeData.angle, snakeData.pivot_360, snakeData.clockwise, snakeData.start_angle, snakeData.end_angle));
-			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, snakeData.x*10, snakeData.y*10));
+			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, (snakeData.y+0.5)*10, (snakeData.x+0.5)*10));
 		});
 	}
 

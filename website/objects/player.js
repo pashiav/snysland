@@ -171,7 +171,7 @@ export class Player extends PhysicsObject {
 
 		this.facing -= dx*sensitivity;
 
-		this.pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2, this.pitch - dy*sensitivity));
+		this.pitch = Math.max(-Math.PI/2+0.001, Math.min(Math.PI/2-0.0001, this.pitch - dy*sensitivity));
 	}
 
 	// Collision
