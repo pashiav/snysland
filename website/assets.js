@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'GLTFLoader';
+import { ColladaLoader } from 'ColladaLoader';
 
 
 class AssetsClass {
@@ -9,6 +10,7 @@ class AssetsClass {
 		this.startLoading();
 		
 		this.model_loader = new GLTFLoader();
+		this.model_loader_collada = new ColladaLoader();
 
 		this.material = {} 
 		this.material.green = new THREE.MeshLambertMaterial({
@@ -28,7 +30,7 @@ class AssetsClass {
 		this.mesh.block = new THREE.Mesh(geometry, this.material.missing);
 
 		this.loadModel("assets/ball.glb", "player");
-		this.loadModel("assets/snake2.glb", "snake");
+		this.loadModel("assets/snake.glb", "snake");
 		this.loadModel("assets/codec_screen.glb", "codec");
 		//this.loadModel("assets/level1entrancephase.glb", "area");
 
@@ -41,14 +43,14 @@ class AssetsClass {
 
 		this.waitLoading();
 	}
-	loadModel(filename, name) {
+	loadModel(filename, name, loader = this.model_loader) {
 		this.mesh[name] = false // Temporary model
 
 		const assetsList = this;
 
 		this.addLoading();
 		new Promise((resolve, reject) => {
-			this.model_loader.load(
+			loader.load(
 				// resource URL
 				filename,
 				// called when the resource is loaded

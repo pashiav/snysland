@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 import { GLTFLoader } from 'GLTFLoader';
+import { ColladaLoader } from 'ColladaLoader';
 
 import stateManager from './state.js';
 
@@ -34,7 +35,7 @@ export class GameClass {
 		this.scene.add(directionalLight); // Add the light to the scene
 
 		// Start game world
-		stateManager.set(codec, this.scene);
+		stateManager.set(world, this.scene);
 		
 	}
 
