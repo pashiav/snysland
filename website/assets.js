@@ -32,19 +32,12 @@ class AssetsClass {
 
 		this.loadModel("assets/ball.glb", "player");
 		this.loadModel("assets/snake.glb", "snake");
-		this.loadModel("assets/codec_screen.glb", "codec");
+		this.loadModel("assets/title.glb", "title");
 
 		this.loadModel("assets/area1.dae", "area1", this.model_loader_collada);
 		this.loadModel("assets/area2.dae", "area2", this.model_loader_collada);
 		this.loadModel("assets/area3.dae", "area3", this.model_loader_collada);
 		this.loadModel("assets/area4.dae", "area4", this.model_loader_collada);
-		this.loadModel("assets/clns1.glb", "clns1");
-		this.loadModel("assets/clns3.glb", "clns3");
-		this.loadModel("assets/clns5.glb", "clns5");
-		this.loadModel("assets/clns7.glb", "clns7");
-		this.loadModel("assets/bgt2.glb", "bgt2");
-		this.loadModel("assets/bgt4.glb", "bgt4");
-		this.loadModel("assets/bgt6.glb", "bgt6");
 		//this.loadModel("assets/level1entrancephase.glb", "area");
 
 		// JSONs
