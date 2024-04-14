@@ -2,7 +2,7 @@
 // Controls music playback
 
 // Asset loading
-import {Howl} from 'howler';
+// import {Howl} from 'howler';
 class AudioSystem {function() {
 	let currentMusic = false
 
