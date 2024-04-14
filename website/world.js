@@ -8,7 +8,7 @@ class World {
 
 	}
 
-	load (scene) {
+	load (scene, area="area1") {
 		// Rendering
 		this.scene = scene;
 
@@ -19,13 +19,14 @@ class World {
 		this.objects = {
 			Player: {},
 			Snake: {},
-			Wall: {dontUpdate: true}
+			Wall: {dontUpdate: true},
+			Exit: {}
 		};
 
 		this.player = this.spawnObject("Player", new Player(this.spatial_hash, this.scene, 20, 20, 0));
 
 		// Area
-		this.area = new Area(this.scene, "area1");
+		this.area = new Area(this.scene, area);
 	}
 
 	spawnObject(name, obj, id) {

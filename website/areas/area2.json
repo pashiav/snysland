@@ -93,5 +93,6 @@
         }
     ],
     "entrance": [0,7],
-    "exit": [11,23]
+    "exit": [11,23],
+    "exit_to": "area3"
 }

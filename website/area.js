@@ -2,6 +2,7 @@ import { PhysicsObject } from './objects/object.js'
 import { Shape } from './shape.js'
 import Assets from './assets.js'
 import { Snake } from './objects/snake.js'; // Import the Snake class
+import { Exit } from './objects/exit.js'; // Import the Snake class
 
 
 import { Wall } from './objects/wall.js';
@@ -53,6 +54,11 @@ export class Area {
 		this.snakes.forEach(snakeData => {
 			world.spawnObject("Snake", new Snake(world.spatial_hash, this.scene, snakeData.id, (snakeData.y+0.5)*10, (snakeData.x+0.5)*10, snakeData.angle, snakeData.pivot_360, snakeData.clockwise, snakeData.start_angle, snakeData.end_angle));
 		});
+
+		this.exit = this.json.exit;
+		this.exit_to = this.json.exit_to;
+		// Create Snake objects
+		world.spawnObject("Exit", new Exit(world.spatial_hash, this.scene, (this.exit[1]+0.5)*10, (this.exit[0]+0.5)*10, this.exit_to));
 
 		world.player.setPosition(this.json.entrance[1]*10, this.json.entrance[0]*10);
 	}

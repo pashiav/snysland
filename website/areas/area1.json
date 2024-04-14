@@ -78,5 +78,6 @@
         }
     ],
     "entrance": [11,23],
-    "exit": [0,7]
+    "exit": [0,7],
+    "exit_to": "area2"
 }
