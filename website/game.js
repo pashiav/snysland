@@ -5,7 +5,6 @@ import { ColladaLoader } from 'ColladaLoader';
 
 import stateManager from './state.js';
 
-import world from './world.js';
 
 import Assets from './assets.js'
 
@@ -35,7 +34,7 @@ export class GameClass {
 		this.scene.add(directionalLight); // Add the light to the scene
 
 		// Start game world
-		stateManager.set(world, this.scene);
+		stateManager.set(codec, this.scene);
 		
 	}
 

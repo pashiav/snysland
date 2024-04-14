@@ -32,7 +32,7 @@ class AssetsClass {
 
 		this.loadModel("assets/ball.glb", "player");
 		this.loadModel("assets/snake.glb", "snake");
-		this.loadModel("assets/codec_screen.glb", "codec");
+		this.loadModel("assets/title.glb", "title");
 
 		this.loadModel("assets/area1.dae", "area1", this.model_loader_collada);
 		this.loadModel("assets/area2.dae", "area2", this.model_loader_collada);
