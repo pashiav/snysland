@@ -49,6 +49,7 @@ class World {
 			}
 		}
 		updatePhysics(this.objects, this.spatial_hash, dt);
+		this.area.update(dt);
 	}
 
 	render (renderer, scene, camera) {
